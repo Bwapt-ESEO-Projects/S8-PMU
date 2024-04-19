@@ -14,8 +14,9 @@
 
 #include <errno.h>
 
-pthread_mutex_t mutex;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_barrier_t barrier;
+
 
 void *alambix_place_order(void *arg);
 
@@ -23,6 +24,7 @@ void *alambix_server_function();
 
 void alambix_init()
 {
+
 	if (pthread_mutex_init(&mutex, NULL) != 0) {
 
         fprintf(stderr, "erreur pthread_mutex_init\n");
@@ -124,6 +126,7 @@ int main(int argc, char *argv[])
 {
 	alambix_open();
 
+	mq_unlink(MQ_NAME);
 	pthread_barrier_destroy(&barrier);
 	pthread_mutex_destroy(&mutex);
 
