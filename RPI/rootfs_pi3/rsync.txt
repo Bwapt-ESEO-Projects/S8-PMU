@@ -1,0 +1,3 @@
+Run this command to sync the packages of the RPI and your working computer.
+
+rsync -rl --delete-after --safe-links --copy-unsafe-links pi@10.42.0.42:/{lib,usr} .
